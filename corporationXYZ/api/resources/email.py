@@ -43,4 +43,4 @@ class EmailResource(Resource):
         db.session.add(email)
         db.session.commit()
 
-        return {"msg": "user created", "user": schema.dump(email)}, 201
+        return {"msg": "Email sent!!", "email": schema.dump(email)}, 201
