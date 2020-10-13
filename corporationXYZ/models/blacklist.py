@@ -27,7 +27,7 @@ class TokenBlacklist(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     revoked = db.Column(db.Boolean, nullable=False)
     expires = db.Column(db.DateTime, nullable=False)
-
+    
     user = db.relationship("User", lazy="joined")
 
     def to_dict(self):

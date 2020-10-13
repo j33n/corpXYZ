@@ -2,7 +2,7 @@ from flask import Blueprint, current_app, jsonify
 from flask_restful import Api
 from marshmallow import ValidationError
 from corporationXYZ.extensions import apispec
-from corporationXYZ.api.resources import UserResource, UserList
+from corporationXYZ.api.resources import UserResource, UserList, EmailResource
 from corporationXYZ.api.schemas import UserSchema
 
 
@@ -12,6 +12,7 @@ api = Api(blueprint)
 
 api.add_resource(UserResource, "/users/<int:user_id>", endpoint="user_by_id")
 api.add_resource(UserList, "/users", endpoint="users")
+api.add_resource(EmailResource, "/email", endpoint="emails")
 
 
 @blueprint.before_app_first_request
@@ -19,6 +20,7 @@ def register_views():
     apispec.spec.components.schema("UserSchema", schema=UserSchema)
     apispec.spec.path(view=UserResource, app=current_app)
     apispec.spec.path(view=UserList, app=current_app)
+    apispec.spec.path(view=EmailResource, app=current_app)
 
 
 @blueprint.errorhandler(ValidationError)
