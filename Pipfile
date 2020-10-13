@@ -1,0 +1,27 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+marshmallow = ">=3"
+flask = "*"
+flask-restful = "*"
+flask-migrate = "*"
+flask-sqlalchemy = "*"
+flask-marshmallow = "*"
+flask-jwt-extended = "*"
+marshmallow-sqlalchemy = "*"
+python-dotenv = "*"
+passlib = "*"
+apispec = {extras = ["yaml"], version = "*"}
+apispec-webframeworks = "*"
+tox = "*"
+gunicorn = "*"
+corporationxyz = {editable = true, path = "."}
+psycopg2 = "*"
+
+[requires]
+python_version = "3.9"
