@@ -14,13 +14,13 @@ def create_app(testing=False, cli=False):
     
     # MailTrap Email Settings
     app.config.update(
-        DEBUG = True,
         MAIL_SERVER = os.getenv("MAILTRAP_SERVER"),
         MAIL_PORT = os.getenv("MAILTRAP_PORT"),
         MAIL_USERNAME = os.getenv("MAILTRAP_USERNAME"),
         MAIL_PASSWORD = os.getenv("MAILTRAP_PASSWORD"),
         MAIL_USE_TLS = True,
-        MAIL_DEBUG = True
+        TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID"),
+        TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
     )
 
     if testing is True:

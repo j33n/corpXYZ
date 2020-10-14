@@ -23,6 +23,7 @@ gunicorn = "*"
 corporationxyz = {editable = true, path = "."}
 psycopg2 = "*"
 flask-mail = "*"
+twilio = "*"
 
 [requires]
 python_version = "3.9"

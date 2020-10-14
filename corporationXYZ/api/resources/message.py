@@ -1,11 +1,16 @@
+import os
+
 from flask import request, current_app as app
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import jwt_required, decode_token
+from twilio.rest import Client
+
 from corporationXYZ.api.schemas import MessageSchema
 from corporationXYZ.models import Message
 from corporationXYZ.extensions import db
 
 
+# Basic validations(emptyness)
 parser = reqparse.RequestParser()
 parser.add_argument('recipient', required=True, help='Recipient phone number is required')
 parser.add_argument('body', required=True, help='Cannot send a blank message')
@@ -25,13 +30,30 @@ class MessageResource(Resource):
 
         schema = MessageSchema()
 
-        message = Message(
-            user_id = user_identity,
-            recipient = args['recipient'],
-            body = args['body']
-        )
+        # Initialize Twilio
+        account_sid = app.config["TWILIO_ACCOUNT_SID"]
+        auth_token = app.config["TWILIO_AUTH_TOKEN"]
+        twilioClient = Client(account_sid, auth_token)
 
-        db.session.add(message)
-        db.session.commit()
+        # Send message
+        try:
+            sentMessage = twilioClient.messages \
+                    .create(
+                        body=args['body'],
+                        from_=os.getenv("TWILIO_PHONE_NBR"),
+                        to=args['recipient']
+                    )
 
-        return {"msg": "Message sent!!", "message": schema.dump(message)}, 201
+            message = Message(
+                user_id = user_identity,
+                recipient = args['recipient'],
+                body = args['body']
+            )
+
+            db.session.add(message)
+            db.session.commit()
+
+            return {"msg": "Message sent!!", "message": schema.dump(message)}, 201
+
+        except Exception as e:
+            return({"error": str(e)})
