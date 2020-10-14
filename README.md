@@ -9,14 +9,18 @@ A simple api application that allows companies to send and receive notifications
 Up and Running Locally
 ------------------------
 
-1. Fill in the relevant information in the `.flaskenv` file in the root folder.
+1. Fill in the relevant information in the `.flaskenv` and `env` files in the root folder.
 A valid environment variable file should contain the following values:
+**.flaskenv**
 ```
 FLASK_ENV=development
 FLASK_APP=corporationXYZ.app:create_app
 SECRET_KEY=changeme
 DATABASE_URL=postgresql://postgres@localhost:5432/corporationXYZ
+```
 
+**.env**
+```
 MAILTRAP_SERVER=smtp.mailtrap.io
 MAILTRAP_PORT=2525
 MAILTRAP_USERNAME=59c7**********
