@@ -19,6 +19,41 @@ parser.add_argument('Authorization', location='headers')
 
 
 class MessageResource(Resource):
+    """Single object resource
+
+    ---
+    post:
+      tags:
+        - Messages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                recipient:
+                  type: string
+                  example: "+250788222222"
+                  required: true
+                body:
+                  type: string
+                  example: Hello from the Corp api
+                  required: true
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Message sent!!
+                  message: MessageSchema
+        400:
+          description: a DB or twilio exception error
+    """
+
     method_decorators = [jwt_required]
 
     def post(self):

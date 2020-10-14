@@ -19,6 +19,44 @@ parser.add_argument('Authorization', location='headers')
 
 
 class EmailResource(Resource):
+    """Single object resource
+
+    ---
+    post:
+      tags:
+        - Emails
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                to:
+                  type: string
+                  example: "test@gmail.com"
+                  required: true
+                subject:
+                  type: string
+                  example: Hello from the Corp api
+                  required: false
+                bodyContent:
+                  type: string
+                  example: Hello, we just wanted to welcome you onboard
+                  required: true
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Email sent!!
+                  email: EmailSchema
+        400:
+          description: a DB or mailtrap exception error
+    """
     method_decorators = [jwt_required]
 
     def post(self):

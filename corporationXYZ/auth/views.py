@@ -23,7 +23,7 @@ def login():
     ---
     post:
       tags:
-        - auth
+        - Auth
       requestBody:
         content:
           application/json:
@@ -84,7 +84,7 @@ def refresh():
     ---
     post:
       tags:
-        - auth
+        - Auth
       parameters:
         - in: header
           name: Authorization
@@ -120,7 +120,7 @@ def revoke_access_token():
     ---
     delete:
       tags:
-        - auth
+        - Auth
       responses:
         200:
           content:
@@ -150,7 +150,7 @@ def revoke_refresh_token():
     ---
     delete:
       tags:
-        - auth
+        - Auth
       responses:
         200:
           content:
