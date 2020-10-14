@@ -26,7 +26,7 @@ class MessageResource(Resource):
         schema = MessageSchema()
 
         message = Message(
-            user_id=user_identity,
+            user_id = user_identity,
             recipient = args['recipient'],
             body = args['body']
         )

@@ -8,6 +8,7 @@ from passlib.context import CryptContext
 from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
 from flask_migrate import Migrate
+from flask_mail import Mail
 
 from corporationXYZ.commons.apispec import APISpecExt
 
@@ -17,4 +18,5 @@ jwt = JWTManager()
 ma = Marshmallow()
 migrate = Migrate()
 apispec = APISpecExt()
+mail = Mail()
 pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")

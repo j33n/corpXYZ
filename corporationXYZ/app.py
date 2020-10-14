@@ -1,7 +1,9 @@
+import os
+
 from flask import Flask
 
 from corporationXYZ import auth, api
-from corporationXYZ.extensions import db, jwt, migrate, apispec
+from corporationXYZ.extensions import db, jwt, migrate, apispec, mail
 
 
 def create_app(testing=False, cli=False):
@@ -9,6 +11,17 @@ def create_app(testing=False, cli=False):
     """
     app = Flask("corporationXYZ")
     app.config.from_object("corporationXYZ.config")
+    
+    # MailTrap Email Settings
+    app.config.update(
+        DEBUG = True,
+        MAIL_SERVER = os.getenv("MAILTRAP_SERVER"),
+        MAIL_PORT = os.getenv("MAILTRAP_PORT"),
+        MAIL_USERNAME = os.getenv("MAILTRAP_USERNAME"),
+        MAIL_PASSWORD = os.getenv("MAILTRAP_PASSWORD"),
+        MAIL_USE_TLS = True,
+        MAIL_DEBUG = True
+    )
 
     if testing is True:
         app.config["TESTING"] = True
@@ -16,6 +29,7 @@ def create_app(testing=False, cli=False):
     configure_extensions(app, cli)
     configure_apispec(app)
     register_blueprints(app)
+    init_mailtrap(app)
 
     return app
 
@@ -55,3 +69,9 @@ def register_blueprints(app):
     """
     app.register_blueprint(auth.views.blueprint)
     app.register_blueprint(api.views.blueprint)
+
+
+def init_mailtrap(app):
+    """inititialise mailtrap and configs
+    """
+    mail.init_app(app)

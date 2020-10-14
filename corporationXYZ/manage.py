@@ -21,7 +21,13 @@ def init():
     from corporationXYZ.models import User
 
     click.echo("create user")
-    user = User(username="admin", email="admin@test.com", password="admin", active=True)
+    user = User(
+        username="admin",
+        password="admin",
+        active=True,
+        companyName="corporationXYZ",
+        companyEmail="contact@corporationXYZ.com"
+    )
     db.session.add(user)
     db.session.commit()
     click.echo("created user admin")

@@ -22,6 +22,7 @@ tox = "*"
 gunicorn = "*"
 corporationxyz = {editable = true, path = "."}
 psycopg2 = "*"
+flask-mail = "*"
 
 [requires]
 python_version = "3.9"
