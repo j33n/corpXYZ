@@ -11,6 +11,7 @@ Up and Running Locally
 
 1. Fill in the relevant information in the `.flaskenv` and `env` files in the root folder.
 A valid environment variable file should contain the following values:
+
 **.flaskenv**
 ```
 FLASK_ENV=development
@@ -40,3 +41,7 @@ TWILIO_PHONE_NBR=+1**********
 
 Then navigate to http://127.0.0.1:5000/swagger-ui to view a Swagger UI to assist with api navigation
 Or access http://127.0.0.1:5000/swagger.json to view the json documentation
+
+### Available Endpoints
+
+<img src="https://i.ibb.co/PD84m3S/Screen-Shot-2020-10-14-at-13-02-37.png" alt="Screen-Shot-2020-10-14-at-13-02-37" border="0">
